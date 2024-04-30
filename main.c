@@ -46,19 +46,19 @@ int main(void)
 	
     while (1) 
     {
-		
 		PORTC |=1 <<PINC2;
 		videoInput = USART_vReceiveByte();
 		PORTC &=0 <<PINC2;
-		
+	
+				
 		HBridgeInit();
-			
+		
 		switch(state)
 		{
 			//State 1: Forward Drive
 			case 1:
-			HBridgeCommand(LMOT,75,0);
-			HBridgeCommand(RMOT,79,0);
+			HBridgeCommand(RMOT,75,0);
+			HBridgeCommand(LMOT,78,0);
 			
 			LCDGoToPosition(1,1);
 			sprintf(LCD_out, "State 1");
@@ -66,6 +66,8 @@ int main(void)
 			LCDGoToPosition(1,2);
 			sprintf(LCD_out, "SV: %d", videoInput);
 			LCDSendString(LCD_out);
+			_delay_ms(100);
+			
 			
 			//High pixels far left
 			if(videoInput == 1)
@@ -106,6 +108,7 @@ int main(void)
 			LCDGoToPosition(1,2);
 			sprintf(LCD_out, "SV: %d", videoInput);
 			LCDSendString(LCD_out);
+			_delay_ms(100);
 			
 			//Balanced White Pixels
 			if(videoInput == 3)
@@ -138,7 +141,7 @@ int main(void)
 			//State 3: Hard Left Turn
 			case 3:
 			HBridgeCommand(LMOT,100,0);
-			HBridgeCommand(RMOT,35,0);
+			HBridgeCommand(RMOT,26,0);
 			
 			LCDGoToPosition(1,1);
 			sprintf(LCD_out, "State 3");
@@ -146,6 +149,7 @@ int main(void)
 			LCDGoToPosition(1,2);
 			sprintf(LCD_out, "SV: %d", videoInput);
 			LCDSendString(LCD_out);
+			_delay_ms(200);
 			
 			//Balanced White Pixels
 			if(videoInput == 3)
@@ -185,6 +189,7 @@ int main(void)
 			LCDGoToPosition(1,2);
 			sprintf(LCD_out, "SV: %d", videoInput);
 			LCDSendString(LCD_out);
+			_delay_ms(100);
 			
 			//Balanced White Pixels
 			if(videoInput == 3)
@@ -216,7 +221,7 @@ int main(void)
 			
 			//State 5: Hard Right Turn
 			case 5:
-			HBridgeCommand(LMOT,27,0);
+			HBridgeCommand(LMOT,18,0);
 			HBridgeCommand(RMOT,100,0);
 			
 			LCDGoToPosition(1,1);
@@ -225,6 +230,7 @@ int main(void)
 			LCDGoToPosition(1,2);
 			sprintf(LCD_out, "SV: %d", videoInput);
 			LCDSendString(LCD_out);
+			_delay_ms(150);
 			
 			//Balanced White Pixels
 			if(videoInput == 3)
@@ -255,6 +261,7 @@ int main(void)
 			
 			//State 6: Stop
 			case 6:
+			_delay_ms(30000);
 			HBridgeCommand(LMOT,0,0);
 			HBridgeCommand(RMOT,0,0);
 			
@@ -268,6 +275,6 @@ int main(void)
 			break;
 			
 		}//Switch block
-			LCDClearScreen();
+			
     }//while loop
 }//int main loop
