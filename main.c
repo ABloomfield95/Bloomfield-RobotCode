@@ -57,8 +57,8 @@ int main(void)
 		{
 			//State 1: Forward Drive
 			case 1:
-			HBridgeCommand(RMOT,75,0);
-			HBridgeCommand(LMOT,78,0);
+			HBridgeCommand(RMOT,68,0);
+			HBridgeCommand(LMOT,71,0);
 			
 			LCDGoToPosition(1,1);
 			sprintf(LCD_out, "State 1");
@@ -99,8 +99,8 @@ int main(void)
 			
 			//State 2:  Soft Left Turn
 			case 2:
-			HBridgeCommand(LMOT,75,0);
-			HBridgeCommand(RMOT,40,0);
+			HBridgeCommand(LMOT,70,0);
+			HBridgeCommand(RMOT,34,0);
 			
 			LCDGoToPosition(1,1);
 			sprintf(LCD_out, "State 2");
@@ -149,7 +149,7 @@ int main(void)
 			LCDGoToPosition(1,2);
 			sprintf(LCD_out, "SV: %d", videoInput);
 			LCDSendString(LCD_out);
-			_delay_ms(200);
+			_delay_ms(150);
 			
 			//Balanced White Pixels
 			if(videoInput == 3)
@@ -180,8 +180,8 @@ int main(void)
 			
 			//State 4: Soft Right Turn
 			case 4:
-			HBridgeCommand(LMOT,35,0);
-			HBridgeCommand(RMOT,80,0);
+			HBridgeCommand(LMOT,37,0);
+			HBridgeCommand(RMOT,73,0);
 			
 			LCDGoToPosition(1,1);
 			sprintf(LCD_out, "State 4");
@@ -261,7 +261,7 @@ int main(void)
 			
 			//State 6: Stop
 			case 6:
-			_delay_ms(30000);
+			_delay_ms(50000);
 			HBridgeCommand(LMOT,0,0);
 			HBridgeCommand(RMOT,0,0);
 			
